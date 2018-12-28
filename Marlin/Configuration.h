@@ -28,7 +28,7 @@
 
 ***********************************************************************/
 
-#define PRINTER_NAME "TEVO Tarantula (EasyConfig)"  // Change this to whatever you wish, or leave it as it is.
+#define PRINTER_NAME "Shelob"  // Change this to whatever you wish, or leave it as it is.
                                                     // NOTE: Whatever you put here will have " Ready..." appended to it.
 
 /**
@@ -37,8 +37,8 @@
 //#define LARGE_BED
 #define SDSUPPORT
 //#define CHANGE_Y_DIRECTION        // If your bed homes in the wrong direction (it should move front to back) enable this.
-//#define CHANGE_X_DIRECTION        // If your X carriage homes in the wrong direction (it should move right to left) enable this.
-//#define CHANGE_Z_DIRECTION        // If your Z homes in the wrong direction (it should move top to bottom) enable this.
+#define CHANGE_X_DIRECTION        // If your X carriage homes in the wrong direction (it should move right to left) enable this.
+#define CHANGE_Z_DIRECTION        // If your Z homes in the wrong direction (it should move top to bottom) enable this.
 //#define HOTEND_E3DV6              // Genuine E3D v6 hotend.
 //#define FULL_GRAPHIC_SMART        // Enable this if you have a RepRap Discount Full Graphic Smart Controller (The
                                     // stock controller is a RepRap Discount Smart Controller)
@@ -60,14 +60,14 @@
 /**
  * Minimal Z height (in mm) before homing (G28) for Z clearance above the bed, clamps, ...
  */
-#define Z_HOMING_HEIGHT 5
+#define Z_HOMING_HEIGHT 2
 
 /**
  * Primary Extruder steps per mm (plugged in to E0 port on controller)
  * (How to calibrate: https://toms3d.org/2014/04/06/3d-printing-guides-calibrating-your-extruder/)
  */
-#define E0_STEPS      100 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
-//#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this.
+#define E0_STEPS      400 // Stock extruder. If you have a Tevo Titan, try 400 then calibrate.
+#define CHANGE_E0_DIRECTION   // If your extruder is going backwards, enable this.
 
 /**
  * Z Axis steps per mm (Default for stock lead screw is 1600)
@@ -79,7 +79,7 @@
  * Z-Probe type (must be none or one of them)
  * If a Z-Probe type is selected, a Bed Leveling type other than MANUAL must be selected.
  */
-//#define BLTOUCH         // ANTClabs BLTouch sensor (might also work with clones)
+#define BLTOUCH         // ANTClabs BLTouch sensor (might also work with clones)
 //#define SN04          // Green sensor
 //#define INDUCTIVE_NO  // Normally open inductive sensor
 //#define INDUCTIVE_NC  // Normally closed inductive sensor
@@ -92,9 +92,9 @@
  */
 //#define TRIPOINT
 //#define LINEAR
-//#define BILINEAR
+#define BILINEAR
 //#define UBL
-#define MANUAL
+//#define MANUAL
 
 /**
  * Z-Probe offset from nozzle (https://github.com/JimBrown/MarlinTarantula/wiki/How-to-determine-your-Z-Probe-offset)
@@ -104,13 +104,13 @@
 #define SENSOR_LEFT        0
 #define SENSOR_RIGHT       0
 #define SENSOR_FRONT       0
-#define SENSOR_BEHIND      0
+#define SENSOR_BEHIND      65
 
 /**
  * Number of grid points in each direction
  * Minimum 3. Maximum 15 for UBL. Maximum 7 for MANUAL
  */
-#define GRID_POINTS        3
+#define GRID_POINTS        5
 
 /**
  * Margin around perimiter of bed for probing (will not probe outside this margin)
@@ -184,8 +184,8 @@
  *       CUSTOM_USER_MENUS for PETG to appear, along with PLA and ABS, under Custom Commands.
  *       PLA and ABS will appear under both Custom Command and Prepare.
  */
-#define Hot_PLA     215
-#define Bed_PLA      75
+#define Hot_PLA     195
+#define Bed_PLA      50
 
 #define Hot_ABS 		240
 #define Bed_ABS 		100
@@ -1123,7 +1123,8 @@
 #define Z_CLEARANCE_MULTI_PROBE     Z_HOMING_HEIGHT // Z Clearance between multiple probes
 #define Z_AFTER_PROBING             Z_HOMING_HEIGHT // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -2 // Farthest distance below the trigger-point to go before stopping
+//#define Z_PROBE_LOW_POINT          -2
+#define Z_PROBE_LOW_POINT          -5 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
 #define Z_PROBE_OFFSET_RANGE_MIN -20
@@ -1474,7 +1475,7 @@
  * Add a bed leveling sub-menu for ABL or MBL.
  * Include a guided procedure if manual probing is enabled.
  */
-#if DISABLED(BLTOUCH) && DISABLED(SN04) && DISABLED(INDUCTIVE_NC) && DISABLED(INDUCTIVE_NO) && DISABLED(SERVO_PROBE) && DISABLED(NOZZLE_PROBE) && ENABLED(MANUAL)
+#if ENABLED(BLTOUCH) && DISABLED(SN04) && DISABLED(INDUCTIVE_NC) && DISABLED(INDUCTIVE_NO) && DISABLED(SERVO_PROBE) && DISABLED(NOZZLE_PROBE) && DISABLED(MANUAL)
   #define LCD_BED_LEVELING
 #endif
 
